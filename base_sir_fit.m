@@ -11,7 +11,7 @@ covidremainmo_full = double(table2array(COVID_remainMO(:,[5:6])))./(100000*remai
 
 coviddata = covidstlcity_full; % TO SPECIFY
 t = length(coviddata(:, 1)); % TO SPECIFY
-
+pop = 100000 * STLcityPop; % TO SPECIFY
 % The following line creates an 'anonymous' function that will return the cost (i.e., the model fitting error) given a set
 % of parameters.  There are some technical reasons for setting this up in this way.
 % Feel free to peruse the MATLAB help at
@@ -41,7 +41,7 @@ bf = [1];
 % lb < x < ub
 % here, the inequality is imposed element-wise
 % If you don't want such a constraint, keep these matrices empty.
-ub = [1, 1, 1, 1, 1, 1, 1]';
+ub = [1, 1, 1, 1, 1, 0, 0]';
 lb = [0, 0, 0, 0, 0, 0, 0]';
 
 % Specify some initial parameters for the optimizer to start from
@@ -51,10 +51,6 @@ x0 = [0.003, 0.004, 0.66, 1, 0, 0, 0];
 % fit the data
 % note tath you 
 x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub)
-
-%plot(Y);
-%legend('S','I','R','D');
-%xlabel('Time')
 
 Y_fit = siroutput_full(x,t);
 
@@ -66,3 +62,4 @@ hold on
 plot(casesModel);
 plot(deathsModel);
 plot(coviddata);
+legend("Model Cases", "Model Deaths", "Cases", "Deaths");

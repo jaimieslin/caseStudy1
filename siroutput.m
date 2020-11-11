@@ -39,6 +39,6 @@ casesModel = 1 - y(:, 1);
 casesActual = data(1:t, 1);
 deathsModel = y(:, 4);
 deathsActual = data(1:t, 2);
-f = ((norm(casesModel - casesActual)^2) / t) + ((norm(deathsModel - deathsActual)^2) / t);
+f = (norm(casesModel - casesActual)) + (norm(deathsModel - deathsActual));
 
 end
