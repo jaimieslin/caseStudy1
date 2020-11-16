@@ -10,9 +10,9 @@ covidstlmetro_full = double(table2array(COVID_STLmetro(:,[5:6])));
 covidkcmetro_full = double(table2array(COVID_KCmetro(:,[5:6])));
 covidremainmo_full = double(table2array(COVID_remainMO(:,[5:6])));
 
-coviddata = covidstlmetro_full; % TO SPECIFY
+coviddata = covidstlcnty_full; % TO SPECIFY
 t = length(coviddata(:, 1)); % TO SPECIFY
-pop = 100000*STLmetroPop;
+pop = STLcntyPop*100000; % TO SPECIFY
 
 % The following line creates an 'anonymous' function that will return the cost (i.e., the model fitting error) given a set
 % of parameters.  There are some technical reasons for setting this up in this way.
@@ -27,16 +27,16 @@ sirafun= @(x)siroutput(x,t,coviddata, pop);
 % Set A and b to impose a parameter inequality constraint of the form A*x < b
 % Note that this is imposed element-wise
 % If you don't want such a constraint, keep these matrices empty.
-A = [1, 1, 1, 1, 1, 1, 1];
-b = [1];
+A = [];
+b = [];
 
 %% set up some fixed constraints
 % Set Af and bf to impose a parameter constraint of the form Af*x = bf
 % Hint: For example, the sum of the initial conditions should be
 % constrained
 % If you don't want such a constraint, keep these matrices empty.
-Af = [];
-bf = [];
+Af = [1, 1, 1, 1, 1, 1, 1];
+bf = [1];
 
 %% set up upper and lower bound constraints
 % Set upper and lower bounds on the parameters
@@ -58,16 +58,16 @@ x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 %legend('S','I','R','D');
 %xlabel('Time')
 
-Y_fit = siroutput_full(x,t);
+Y_fit = siroutput_full(x,t)*pop;
 
 
 % Make some plots that illustrate your findings.
-casesModel = Y_fit(:, 2)*pop;
-deathsModel = Y_fit(:, 4)*pop;
+casesModel = Y_fit(:, 2);
+deathsModel = Y_fit(:, 4);
 figure;
 hold on
 
 plot(casesModel);
 plot(deathsModel);
 plot(coviddata);
-legend("Model Cases", "Model Deaths", "Cases", "Deaths");
+legend("Model Cases", "Model Deaths", "Cases", "Deaths", 'Location', 'northwest');

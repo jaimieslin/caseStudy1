@@ -28,16 +28,16 @@ x0 = [ic_susc ic_inf, ic_rec, ic_fatality].';
 
 % simulate the SIRD model for t time-steps
 sys_sir_base = ss(A,B,eye(4),zeros(4,1),1);
-y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
+y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0)*pop;
 
 % return a "cost".  This is the quantitity that you want your model to
 % minimize.  Basically, this should encapsulate the difference between your
 % modeled data and the true data. Norms and distances will be useful here.
 % Hint: This is a central part of this case study!  choices here will have
 % a big impact!
-casesModel = (y(:, 2))*pop;
+casesModel = (y(:, 2));
 casesActual = data(1:t, 1);
-deathsModel = y(:, 4)*pop;
+deathsModel = y(:, 4);
 deathsActual = data(1:t, 2);
 f = (norm(casesModel - casesActual)) + (norm(deathsModel - deathsActual));
 
