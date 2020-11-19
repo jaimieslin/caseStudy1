@@ -17,7 +17,7 @@ covidremainmo_1 = double(table2array(COVID_remainMO(1:100,[5:6])))%./(100000*rem
 covidremainmo_2 = double(table2array(COVID_remainMO(101:180,[5:6])))%./(100000*remainMOPop);
 covidremainmo_3 = double(table2array(COVID_remainMO(181:235,[5:6])))%./(100000*remainMOPop);
 
-len = min([length(covidstlmetro_full(:, 1)), length(covidkcmetro_full(:, 1)), length(covidremainmo_full(:, 1))]);
+len = min([length(covidstlmetro_full(:, 1)), length(covidkcmetro_full(:, 1)), length(covidremainmo_full(:, 1))]); % TO SPECIFY
 coviddata = cat(2, covidstlmetro_full(1:len, :), covidkcmetro_full(1:len, :), covidremainmo_full(1:len, :)); % TO SPECIFY
 t = len; % TO SPECIFY
 pop = 100000 * (STLmetroPop + KCmetroPop + remainMOPop); % TO SPECIFY
@@ -71,7 +71,7 @@ x0 = zeros(1, 31);
 % note tath you 
 x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub)
 
-Y_fit = siroutput_full_network(x,t);
+Y_fit = siroutput_full_network(x,t + 365);
 
 casesModel_1 = 1 - Y_fit(:, 1);
 deathsModel_1 = Y_fit(:, 4);
@@ -90,7 +90,7 @@ plot(coviddata(:, 1:2) * pop, "linewidth", 2);
 hold off;
 set(gca, "fontsize", 15);
 title("Modeled vs. Actual COVID-19 Data in STL Metro", 'fontsize', 14);
-legend("Model Cases", "Model Deaths", "Cases", "Deaths");
+legend("Model Cases", "Model Deaths", "Cases", "Deaths", "location", "northwest");
 xlabel("Time (days)");
 ylabel("Number of Individuals");
 figure;
@@ -101,8 +101,8 @@ plot(deathsModel_2 * pop, "linewidth", 2);
 plot(coviddata(:, 3:4) * pop, "linewidth", 2);
 hold off;
 set(gca, "fontsize", 15);
-title("Modeled vs. Actual COCID-19 Data in KC Metro", 'fontsize', 14);
-legend("Model Cases", "Model Deaths", "Cases", "Deaths");
+title("Modeled vs. Actual COVID-19 Data in KC Metro", 'fontsize', 14);
+legend("Model Cases", "Model Deaths", "Cases", "Deaths", "location", "northwest");
 xlabel("Time (days)");
 ylabel("Number of Individuals");
 figure;
@@ -114,6 +114,6 @@ plot(coviddata(:, 5:6) * pop, "linewidth", 2);
 hold off;
 set(gca, "fontsize", 15);
 title("Modeled vs. Actual COVID-19 Data in Remain MO", 'fontsize', 14);
-legend("Model Cases", "Model Deaths", "Cases", "Deaths");
+legend("Model Cases", "Model Deaths", "Cases", "Deaths", "location", "northwest");
 xlabel("Time (days)");
 ylabel("Number of Individuals");
