@@ -104,5 +104,5 @@ deathsActual_3 = data(1:t, 6);
 f1 = (norm(casesModel_1 - casesActual_1)) + (norm(deathsModel_1 - deathsActual_1));
 f2 = (norm(casesModel_2 - casesActual_2)) + (norm(deathsModel_2 - deathsActual_2));
 f3 = (norm(casesModel_3 - casesActual_3)) + (norm(deathsModel_3 - deathsActual_3));
-f = f1 + f2 + f3;
+f = f1 + 2 * f2 + f3;
 end

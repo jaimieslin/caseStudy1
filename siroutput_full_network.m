@@ -25,19 +25,19 @@ ic_rec = x(12);
 ic_fatality = x(13);
 
 % Set up SIRD within-population transmission matrix
-A1 = [ 1 - k_infections_1,                            0, 0, 0;
-          k_infections_1, 1 - (k_recover_1 + k_fatality_1), 0, 0;
-                     0,                    k_recover_1, 1, 0;
-                     0,                   k_fatality_1, 0, 1];
+A1 = [ 1 - k_infections_1,                                0, 0, 0;
+           k_infections_1, 1 - (k_recover_1 + k_fatality_1), 0, 0;
+                        0,                      k_recover_1, 1, 0;
+                        0,                     k_fatality_1, 0, 1];
                  
-A2 = [ 1 - k_infections_2,                            0, 0, 0;
-          k_infections_2, 1 - (k_recover_2 + k_fatality_2), 0, 0;
-                     0,                    k_recover_2, 1, 0;
-                     0,                   k_fatality_2, 0, 1];
-A3 = [ 1 - k_infections_3,                            0, 0, 0;
-          k_infections_3, 1 - (k_recover_3 + k_fatality_3), 0, 0;
-                     0,                    k_recover_3, 1, 0;
-                     0,                   k_fatality_3, 0, 1];
+A2 = [ 1 - k_infections_2,                                0, 0, 0;
+           k_infections_2, 1 - (k_recover_2 + k_fatality_2), 0, 0;
+                        0,                      k_recover_2, 1, 0;
+                        0,                     k_fatality_2, 0, 1];
+A3 = [ 1 - k_infections_3,                                0, 0, 0;
+           k_infections_3, 1 - (k_recover_3 + k_fatality_3), 0, 0;
+                        0,                      k_recover_3, 1, 0;
+                        0,                     k_fatality_3, 0, 1];
                  
 A = blkdiag(A1, A2, A3);
 
