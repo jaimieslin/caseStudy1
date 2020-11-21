@@ -70,7 +70,7 @@ T(11, 3) = x(30); % Chance that recovered person in pop. 3 goes to pop. 1
 T(11, 7) = x(31); % Chance that recovered person in pop. 3 goes to pop. 2
 T(11, 11) = 1 - (x(30) + x(31)); % Chance that recovered person in pop. 3 stays in pop. 3
 
- % Dead people will stay in the same place
+% Dead people will stay in the same place
 T(4, 4) = 1;
 T(8, 8) = 1;
 T(12, 12) = 1;
@@ -82,11 +82,11 @@ B = zeros(12,1);
 % Set up the vector of initial conditions
 x0 = [ic_susc, ic_inf, ic_rec, ic_fatality, ic_susc, ic_inf, ic_rec, ic_fatality, ic_susc, ic_inf, ic_rec, ic_fatality];
 
-% simulate the SIRD model for t time-steps
+% Simulate the SIRD model for t time-steps
 sys_sir_base = ss(A,B,eye(12),zeros(12,1),1);
 y = lsim(sys_sir_base,zeros(t,1),linspace(0,t-1,t),x0);
 
-% return the output of the simulation
+% Return the output of the simulation
 f = y;
 
 end
