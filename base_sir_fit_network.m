@@ -1,5 +1,6 @@
 %% Load and set up data, input parameters to fit model to.
 
+clear;
 load("COVIDdata.mat");
 
 % STL Metro data
