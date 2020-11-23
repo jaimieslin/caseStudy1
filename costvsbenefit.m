@@ -1,6 +1,6 @@
 %% Finds the best interventions strategy based off cost and benefit functions.
 %  YOU MUST RUN base_sir_fit.m PRIOR TO RUNNING THIS IN ORDER TO HAVE THE
-%  CORRECT VARIABLES (x, Y_fit) IN YOUR WORKSPACE.
+%  CORRECT VARIABLES IN YOUR WORKSPACE.
 
 % Sets up initial conditions
 baseCase = x;
