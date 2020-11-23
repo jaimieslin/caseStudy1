@@ -2,20 +2,20 @@
 
 t = 100; % Number of time steps
 
-x1 = [1; 0; 0; 0]; % Initial conditions for population 1
-x2 = [1; 0; 0; 0]; % Initial conditions for population 2
-x3 = [1; 0; 0; 0]; % Initial conditions for population 3
+x1 = [100; 0; 0; 0]; % Initial conditions for population 1
+x2 = [200; 0; 0; 0]; % Initial conditions for population 2
+x3 = [150; 0; 0; 0]; % Initial conditions for population 3
 x = cat(1, x1, x2, x3);
 
 A1 = [ 0.95, 0.04, 0, 0; % Within-population changes for population 1
        0.05, 0.85, 0, 0;
           0, 0.10, 1, 0;
           0, 0.01, 0, 1];
-A2 = [ 0.95, 0.04, 0, 0; % Within-population changes for population 1
-       0.05, 0.85, 0, 0;
-          0, 0.10, 1, 0;
-          0, 0.01, 0, 1];
-A3 = [ 0.95, 0.04, 0, 0; % Within-population changes for population 1
+A2 = [ 0.92, 0, 0, 0; % Within-population changes for population 2
+       0.08, 0.78, 0, 0;
+          0, 0.2, 1, 0;
+          0, 0.02, 0, 1];
+A3 = [ 0.95, 0.04, 0, 0; % Within-population changes for population 3
        0.05, 0.85, 0, 0;
           0, 0.10, 1, 0;
           0, 0.01, 0, 1];
@@ -51,50 +51,63 @@ T(11, 3) = 0.03; % Chance that recovered person in pop. 3 goes to pop. 1
 T(11, 7) = 0.03; % Chance that recovered person in pop. 3 goes to pop. 2
 T(11, 11) = 0.94; % Chance that recovered person in pop. 3 stays in pop. 3
 
+% Dead people will stay in the same place
+T(4, 4) = 1;
+T(8, 8) = 1;
+T(12, 12) = 1;
+
 B = T * A;
      
-[S, I, R, D] = sird(x, B, t);
+[S, I, R, D] = sirdGroups(x, B, t);
 
 %% Plots the epidemic.
 
 figure;
-subplot(3, 1, 1);
+set(gca, "linewidth", 2);
 hold on;
-plot(S(1, :));
-plot(I(1, :));
-plot(R(1, :));
-plot(D(1, :));
+plot(S(1, :), "linewidth", 2);
+plot(I(1, :), "linewidth", 2);
+plot(R(1, :), "linewidth", 2);
+plot(D(1, :), "linewidth", 2);
 hold off;
+set(gca, "fontsize", 15);
 legend("Susceptible", "Infected", "Recovered", "Deceased");
 title("SIRD Model Simulation for Population 1");
-ylabel("Fraction of Population");
+ylabel("Number of Individuals");
 xlabel("Time (steps)");
-subplot(3, 1, 2);
+exportgraphics(gca, "modelPop1.eps", "Resolution", 300);
+figure;
+set(gca, "linewidth", 2);
 hold on;
-plot(S(2, :));
-plot(I(2, :));
-plot(R(2, :));
-plot(D(2, :));
+plot(S(2, :), "linewidth", 2);
+plot(I(2, :), "linewidth", 2);
+plot(R(2, :), "linewidth", 2);
+plot(D(2, :), "linewidth", 2);
 hold off;
+set(gca, "fontsize", 15);
 legend("Susceptible", "Infected", "Recovered", "Deceased");
 title("SIRD Model Simulation for Population 2");
-ylabel("Fraction of Population");
+ylabel("Number of Individuals");
 xlabel("Time (steps)");
-subplot(3, 1, 3);
+exportgraphics(gca, "modelPop2.eps", "Resolution", 300);
+figure;
+set(gca, "linewidth", 2);
 hold on;
-plot(S(3, :));
-plot(I(3, :));
-plot(R(3, :));
-plot(D(3, :));
+plot(S(3, :), "linewidth", 2);
+plot(I(3, :), "linewidth", 2);
+plot(R(3, :), "linewidth", 2);
+plot(D(3, :), "linewidth", 2);
 hold off;
+set(gca, "fontsize", 15);
 legend("Susceptible", "Infected", "Recovered", "Deceased");
 title("SIRD Model Simulation for Population 3");
-ylabel("Fraction of Population");
+ylabel("Number of Individuals");
 xlabel("Time (steps)");
+exportgraphics(gca, "modelPop3.eps", "Resolution", 300);
 %% Models and epidemic given an initial condition and rates of death, infection,
 %  recovery, etc.
 
-function [S, I, R, D] = sird(x, B, t)
+function [S, I, R, D] = sirdGroups(x, B, t)
 S = zeros(3, t+1);
 I = zeros(3, t+1);
 R = zeros(3, t+1);

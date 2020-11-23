@@ -2,12 +2,12 @@
 
 t = 100; % Number of time steps
 
-x = [1; 0; 0; 0]; % Initial conditions
+x = [100; 0; 0; 0]; % Initial conditions
 
-A = [ 0.95, 0.04, 0, 0;
-      0.05, 0.85, 0, 0;
-         0, 0.10, 1, 0;
-         0, 0.01, 0, 1];
+A = [ 0.95, 0.0, 0, 0; % Infection, death, recovery rates, etc.
+      0.05, 0.8, 0, 0;
+         0, 0.05, 1, 0;
+         0, 0.15, 0, 1];
      
 [S, I, R, D] = sird(x, A, t);
 
@@ -15,14 +15,19 @@ A = [ 0.95, 0.04, 0, 0;
 
 figure;
 hold on
-plot(S);
-plot(I);
-plot(R);
-plot(D);
+set(gca, "linewidth", 2);
+plot(S, "linewidth", 2);
+plot(I, "linewidth", 2);
+plot(R, "linewidth", 2);
+plot(D, "linewidth", 2);
+set(gca, "fontsize", 15);
 legend("Susceptible", "Infected", "Recovered", "Deceased");
 title("SIRD Model Simulation");
-ylabel("Fraction of Population");
+ylabel("Number of Individuals");
 xlabel("Time (steps)");
+
+ax = gca;
+exportgraphics(ax, "model.eps", "Resolution", 300);
 %% Models and epidemic given an initial condition and rates of death, infection,
 %  recovery, etc.
 
