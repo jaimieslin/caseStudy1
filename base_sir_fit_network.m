@@ -63,7 +63,7 @@ lb = zeros(1, 31);
 x0 = zeros(1, 31); 
 %% Run fmincon to find best model fit and simulate model
 
-x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub)
+x = fmincon(sirafun,x0,A,b,Af,bf,lb,ub);
 
 Y_fit = siroutput_full_network(x, t);
 
@@ -77,13 +77,14 @@ deathsModel_2 = Y_fit(:, 8);
 casesModel_3 = 1 - Y_fit(:, 9);
 deathsModel_3 = Y_fit(:, 12);
 
-% Plot modeled vs. actual cases and deaths in each subpopulation.
+%% Plot modeled vs. actual cases and deaths in each subpopulation.
+% Population 1: STL Metro
 figure;
 set(gca, "linewidth", 2);
 hold on;
 plot(casesModel_1 * pop, "linewidth", 2);
 plot(deathsModel_1 * pop, "linewidth", 2);
-plot(coviddata(:, 1:2) * pop, "linewidth", 2);
+plot(coviddata(:, 1:2) * pop, ':', "linewidth", 2);
 hold off;
 set(gca, "fontsize", 15);
 title("Modeled vs. Actual COVID-19 Data in STL Metro", 'fontsize', 14);
@@ -91,12 +92,14 @@ legend("Model Cases", "Model Deaths", "Cases", "Deaths", "location", "northwest"
 xlabel("Time (days)");
 ylabel("Number of Individuals");
 exportgraphics(gca, "networkSTLmetro.eps", "Resolution", 300);
+
+% Population 2: KC Metro
 figure;
 set(gca, "linewidth", 2);
 hold on;
 plot(casesModel_2 * pop, "linewidth", 2);
 plot(deathsModel_2 * pop, "linewidth", 2);
-plot(coviddata(:, 3:4) * pop, "linewidth", 2);
+plot(coviddata(:, 3:4) * pop, ':', "linewidth", 2);
 hold off;
 set(gca, "fontsize", 15);
 title("Modeled vs. Actual COVID-19 Data in KC Metro", 'fontsize', 14);
@@ -104,12 +107,14 @@ legend("Model Cases", "Model Deaths", "Cases", "Deaths", "location", "northwest"
 xlabel("Time (days)");
 ylabel("Number of Individuals");
 exportgraphics(gca, "networkKCmetro.eps", "Resolution", 300);
+
+% Population 3: Remaining MO
 figure;
 set(gca, "linewidth", 2);
 hold on;
 plot(casesModel_3 * pop, "linewidth", 2);
 plot(deathsModel_3 * pop, "linewidth", 2);
-plot(coviddata(:, 5:6) * pop, "linewidth", 2);
+plot(coviddata(:, 5:6) * pop,':', "linewidth", 2);
 hold off;
 set(gca, "fontsize", 15);
 title("Modeled vs. Actual COVID-19 Data in Remain MO", 'fontsize', 14);
