@@ -1,4 +1,6 @@
 %% Load covid data into tables
+
+clear;
 load('COVIDdata.mat');
 
 % STL city
