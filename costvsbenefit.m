@@ -13,8 +13,8 @@ control = initial;
 % of 1 x 10^-6. Finds the best relative benefit over a 1 year simulation and
 % saves the change in infection and death rate.
 best = [0, 0, 0];
-for d = 0:0.0000001:baseCase(2)
-    for i = 0:0.0000001:baseCase(1)
+for d = 0:0.000001:baseCase(2)
+    for i = 0:0.000001:baseCase(1)
         
         control = initial;
         
