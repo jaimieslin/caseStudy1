@@ -75,7 +75,7 @@ hold on
 
 plot(casesModel, 'linewidth', 2);
 plot(deathsModel, 'linewidth', 2);
-plot(coviddata, ':', 'linewidth', 2);
+plot(coviddata, 'linewidth', 2);
 
 set(gca, 'linewidth', 2);
 set(gca, 'fontsize', 14);
@@ -110,7 +110,7 @@ hold on
 
 plot(casesModel, 'linewidth', 2);
 plot(deathsModel, 'linewidth', 2);
-plot(coviddata, ':', 'linewidth', 2);
+plot(coviddata, 'linewidth', 2);
 
 set(gca, 'linewidth', 2);
 set(gca, 'fontsize', 14);
@@ -145,7 +145,7 @@ hold on
 
 plot(casesModel, 'linewidth', 2);
 plot(deathsModel, 'linewidth', 2);
-plot(coviddata, ':', 'linewidth', 2);
+plot(coviddata, 'linewidth', 2);
 
 set(gca, 'linewidth', 2);
 set(gca, 'fontsize', 14);
@@ -180,7 +180,7 @@ hold on
 
 plot(casesModel, 'linewidth', 2);
 plot(deathsModel, 'linewidth', 2);
-plot(coviddata, ':', 'linewidth', 2);
+plot(coviddata, 'linewidth', 2);
 
 set(gca, 'linewidth', 2);
 set(gca, 'fontsize', 14);
@@ -215,7 +215,7 @@ hold on
 
 plot(casesModel, 'linewidth', 2);
 plot(deathsModel, 'linewidth', 2);
-plot(coviddata, ':', 'linewidth', 2);
+plot(coviddata, 'linewidth', 2);
 
 set(gca, 'linewidth', 2);
 set(gca, 'fontsize', 14);
